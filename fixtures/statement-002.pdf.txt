@@ -1,0 +1,21 @@
+EUROPA BANK NV
+Customer Statement
+
+Customer: Bayview Healthcare Systems
+Account Number: ****-9913
+Statement Period: From 2026-04-01 To 2026-04-30
+Currency: EUR
+
+Opening Balance: 128,400.00
+Closing Balance: 142,675.50
+
+Transaction History
+2026-04-03 Insurance reimbursement              +28000.00 156400.00
+2026-04-08 Equipment lease                       -3200.00 153200.00
+2026-04-12 Vendor: CloudOps Partners            -7500.00  145700.00
+2026-04-15 Payroll                              -22000.00 123700.00
+2026-04-20 Patient billing receipts             +24500.50 148200.50
+2026-04-25 Utility payment                       -1850.00 146350.50
+2026-04-28 Marketing services                    -3675.00 142675.50
+
+End of statement.

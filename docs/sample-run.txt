@@ -1,0 +1,72 @@
+
+[invoice] invoice-001.pdf
+  coverage: 100%  confidence: 0.90
+    invoice_number         "INV-2026-00482"
+    invoice_date           "2026-06-15"
+    due_date               "2026-07-15"
+    vendor_name            "Acme Widgets Ltd."
+    vendor_address         "100 Industrial Park, Manchester M15 4LH, United Kingdom"
+    bill_to_name           "Northwind Trading Co."
+    subtotal               769.0
+    tax                    153.8
+    total                  922.8
+    currency               "GBP"
+    line_items             [{"description": "Steel ball bearings (1000ct box)", "qua...
+
+[invoice] invoice-002.pdf
+  coverage: 100%  confidence: 0.90
+    invoice_number         "CH-2026-1147"
+    invoice_date           "2026-05-01"
+    due_date               "2026-05-31"
+    vendor_name            "Cloud Hosting Providers Inc."
+    vendor_address         "1500 Cloud Way, Seattle WA 98101"
+    bill_to_name           "Northwind SaaS LLC"
+    subtotal               1655.0
+    tax                    132.4
+    total                  1787.4
+    currency               "USD"
+    line_items             [{"description": "EC2 Reserved Instances (m5.xlarge)", "q...
+
+[contract] contract-001.pdf
+  coverage: 100%  confidence: 0.88
+    title                  "Northwind ERP Software License Agreement"
+    party_a                "Northwind Software Limited (the \"Provider\")"
+    party_b                "Acme Manufacturing Inc. (the \"Customer\")"
+    effective_date         "2026-01-15"
+    term_months            36
+    renewal                "Auto-renewal for successive 12-month periods unless eith...
+    notice_period_days     90
+    governing_law          "This agreement is governed by the laws of the State of N...
+
+[contract] contract-002.pdf
+  coverage: 100%  confidence: 0.88
+    title                  "Cloud Infrastructure Management Services"
+    party_a                "Provider: CloudOps Partners LLC"
+    party_b                "Bayview Healthcare Systems"
+    effective_date         "2026-03-01"
+    term_months            24
+    renewal                "This agreement renews on-notice; written notice from Cli...
+    notice_period_days     60
+    governing_law          "Commonwealth of Massachusetts."
+
+[bank_statement] statement-001.pdf
+  coverage: 100%  confidence: 0.91
+    account_holder         "Northwind Trading Co."
+    account_number         "****-7821"
+    period_start           "2026-05-01"
+    period_end             "2026-05-31"
+    opening_balance        45230.0
+    closing_balance        41118.5
+    currency               "USD"
+    transactions           [{"date": "2026-05-02", "description": "Vendor payment - ...
+
+[bank_statement] statement-002.pdf
+  coverage: 100%  confidence: 0.91
+    account_holder         "Bayview Healthcare Systems"
+    account_number         "****-9913"
+    period_start           "2026-04-01"
+    period_end             "2026-04-30"
+    opening_balance        128400.0
+    closing_balance        142675.5
+    currency               "EUR"
+    transactions           [{"date": "2026-04-08", "description": "Equipment lease",...

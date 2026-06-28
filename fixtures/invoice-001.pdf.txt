@@ -1,0 +1,24 @@
+ACME WIDGETS LTD.
+
+Invoice #: INV-2026-00482
+Invoice Date: 2026-06-15
+Due Date: 2026-07-15
+
+From: Acme Widgets Ltd.
+Vendor Address: 100 Industrial Park, Manchester M15 4LH, United Kingdom
+
+Bill To: Northwind Trading Co.
+Billing Address: 500 Trading Way, London SW1A 1AA
+
+Item Description                  | Qty | Unit Price | Line Total
+Steel ball bearings (1000ct box)  | 4   | 125.00     | 500.00
+Bronze bushings (set of 50)       | 2   | 89.50      | 179.00
+Lubricant cartridges              | 12  | 7.50       | 90.00
+
+Subtotal: 769.00
+Tax: 153.80
+Total: 922.80
+
+Currency: GBP
+
+Payment terms: Net 30. Wire transfer to Sort code 20-00-00, Account 12345678.

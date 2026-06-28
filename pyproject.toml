@@ -1,0 +1,33 @@
+[project]
+name = "pdfkit-extract"
+version = "1.0.0"
+description = "Clone-and-run kit for extracting structured data from messy real-world PDFs (invoices, contracts, statements). Pluggable extractor backends (regex stub by default, LLM-shaped seam for production), per-field confidence scores, golden eval harness."
+authors = [{name = "Derek Gallardo", email = "derekgallardo01@gmail.com"}]
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+# The real PDF parser (pypdf) + LLM backend (anthropic). Both optional -
+# default path operates on pre-extracted text fixtures so the demo runs
+# anywhere.
+pdf = [
+    "pypdf>=4.0.0",
+]
+llm = [
+    "anthropic>=0.40.0",
+]
+
+[project.scripts]
+pdfkit = "pdfkit.cli:main"
+
+[project.urls]
+Repository = "https://github.com/derekgallardo01/pdf-extraction-kit"
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]

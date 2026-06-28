@@ -1,0 +1,12 @@
+{
+  "repo": "pdf-extraction-kit",
+  "title": "PDF Extraction Kit",
+  "tagline": "Schema-driven PDF extraction with pluggable backends (regex by default, LLM swap via one env var), per-field confidence scores, and a golden eval harness gating exact extracted values.",
+  "kicker": "PDF · Structured Data · Eval-Gated · Capability Demo",
+  "features": [
+    {"label": "Schemas", "value": "3 (invoice/contract/statement)"},
+    {"label": "Fixtures", "value": "6 worked PDFs"},
+    {"label": "Tests + Evals", "value": "23 pytest + 12 golden"}
+  ],
+  "theme": {"primary": "#0d6b5e", "accent": "#14b8a6"}
+}

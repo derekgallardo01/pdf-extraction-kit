@@ -1,0 +1,89 @@
+{
+  "description": "Golden eval cases - each one asserts the exact value the extractor should produce for specific high-value fields on specific fixtures. CI gates on 100% pass. This is the regression net that catches 'we tweaked the regex and now the invoice total is wrong'.",
+  "cases": [
+    {
+      "id": "invoice-001-total",
+      "fixture": "invoice-001.pdf",
+      "schema": "invoice",
+      "field": "total",
+      "expected_value": 922.80
+    },
+    {
+      "id": "invoice-001-subtotal-not-total",
+      "fixture": "invoice-001.pdf",
+      "schema": "invoice",
+      "field": "subtotal",
+      "expected_value": 769.00
+    },
+    {
+      "id": "invoice-001-number",
+      "fixture": "invoice-001.pdf",
+      "schema": "invoice",
+      "field": "invoice_number",
+      "expected_value": "INV-2026-00482"
+    },
+    {
+      "id": "invoice-002-currency",
+      "fixture": "invoice-002.pdf",
+      "schema": "invoice",
+      "field": "currency",
+      "expected_value": "USD"
+    },
+    {
+      "id": "invoice-002-grand-total",
+      "fixture": "invoice-002.pdf",
+      "schema": "invoice",
+      "field": "total",
+      "expected_value": 1787.40
+    },
+    {
+      "id": "contract-001-effective-date",
+      "fixture": "contract-001.pdf",
+      "schema": "contract",
+      "field": "effective_date",
+      "expected_value": "2026-01-15"
+    },
+    {
+      "id": "contract-001-term-months",
+      "fixture": "contract-001.pdf",
+      "schema": "contract",
+      "field": "term_months",
+      "expected_value": 36
+    },
+    {
+      "id": "contract-002-notice-period",
+      "fixture": "contract-002.pdf",
+      "schema": "contract",
+      "field": "notice_period_days",
+      "expected_value": 60
+    },
+    {
+      "id": "statement-001-opening-balance",
+      "fixture": "statement-001.pdf",
+      "schema": "bank_statement",
+      "field": "opening_balance",
+      "expected_value": 45230.00
+    },
+    {
+      "id": "statement-001-closing-balance",
+      "fixture": "statement-001.pdf",
+      "schema": "bank_statement",
+      "field": "closing_balance",
+      "expected_value": 41118.50
+    },
+    {
+      "id": "statement-002-period-start",
+      "fixture": "statement-002.pdf",
+      "schema": "bank_statement",
+      "field": "period_start",
+      "expected_value": "2026-04-01"
+    },
+    {
+      "id": "statement-002-period-end",
+      "fixture": "statement-002.pdf",
+      "schema": "bank_statement",
+      "field": "period_end",
+      "expected_value": "2026-04-30"
+    }
+  ]
+}

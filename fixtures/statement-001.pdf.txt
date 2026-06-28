@@ -1,0 +1,23 @@
+FIRST NATIONAL BANK
+Statement of Account
+
+Account Holder: Northwind Trading Co.
+Account Number: ****-7821
+Period Start: 2026-05-01
+Period End: 2026-05-31
+Currency: USD
+
+Opening Balance: 45,230.00
+Closing Balance: 41,118.50
+
+Transactions:
+2026-05-02 Vendor payment - Acme Widgets         -922.80   44307.20
+2026-05-05 Customer deposit - Globex Corp        +12500.00 56807.20
+2026-05-10 Wire transfer - Cloud Hosting Inc.    -1787.40  55019.80
+2026-05-15 Payroll run                          -18450.00  36569.80
+2026-05-18 Customer deposit - Initech            +9800.00  46369.80
+2026-05-22 Lease payment - Office HQ             -4250.00  42119.80
+2026-05-28 Customer deposit - Stark Industries   +3500.00  45619.80
+2026-05-30 Tax remittance                        -4501.30  41118.50
+
+End of statement. Questions: support@fnb.example.com

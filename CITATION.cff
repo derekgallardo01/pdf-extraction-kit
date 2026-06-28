@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use or reference this kit, please cite it as below."
+title: "PDF extraction kit"
+authors:
+  - family-names: "Gallardo"
+    given-names: "Derek"
+repository-code: "https://github.com/derekgallardo01/pdf-extraction-kit"
+url: "https://github.com/derekgallardo01/pdf-extraction-kit"
+license: MIT
+version: "1.0.0"
+date-released: "2026-06-28"
+keywords:
+  - pdf-extraction
+  - structured-data
+  - regex
+  - llm
+  - eval-harness
+  - capability-demo

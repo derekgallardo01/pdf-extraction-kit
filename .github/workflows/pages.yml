@@ -1,0 +1,198 @@
+name: Deploy live demo to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install package
+        run: pip install --quiet -e .
+
+      - name: Generate the static demo report
+        run: |
+          mkdir -p site
+          python - <<'PY'
+          import html, json, sys
+          from dataclasses import asdict
+          from pathlib import Path
+          sys.path.insert(0, "src")
+          from pdfkit import schemas, pdf_reader
+          from pdfkit.extractor import Extractor
+
+          FIXTURES = Path("fixtures")
+          RUNS = [
+              ("invoice", "invoice-001.pdf"),
+              ("invoice", "invoice-002.pdf"),
+              ("contract", "contract-001.pdf"),
+              ("contract", "contract-002.pdf"),
+              ("bank_statement", "statement-001.pdf"),
+              ("bank_statement", "statement-002.pdf"),
+          ]
+
+          extractor = Extractor()
+          cards_data = []
+          for schema_name, fixture in RUNS:
+              text = pdf_reader.read_text(FIXTURES / fixture)
+              schema = schemas.get(schema_name)
+              r = extractor.extract(text, schema)
+              cards_data.append({
+                  "schema": schema_name,
+                  "fixture": fixture,
+                  "coverage": r.coverage,
+                  "confidence": r.avg_confidence,
+                  "fields": {k: asdict(v) for k, v in r.fields.items()},
+              })
+
+          def render_field_value(v):
+              if v is None:
+                  return '<span class="missing">(missing)</span>'
+              if isinstance(v, (list, dict)):
+                  return f'<details><summary>{type(v).__name__} with {len(v)} entries</summary><pre>{html.escape(json.dumps(v, indent=2))}</pre></details>'
+              return html.escape(str(v))
+
+          def card(c):
+              fields_html = ""
+              for fname, fr in c["fields"].items():
+                  conf = fr["confidence"]
+                  conf_class = "high" if conf >= 0.9 else "mid" if conf >= 0.7 else "low"
+                  fields_html += f"""
+                    <tr>
+                      <td class="fname">{html.escape(fname)}</td>
+                      <td class="conf {conf_class}">{conf:.2f}</td>
+                      <td class="fval">{render_field_value(fr['value'])}</td>
+                    </tr>
+                  """
+              return f"""
+                <div class="card">
+                  <div class="kicker">{html.escape(c['schema'])}</div>
+                  <h2>{html.escape(c['fixture'])}</h2>
+                  <div class="meta">
+                    <span class="pill">coverage: {int(c['coverage'] * 100)}%</span>
+                    <span class="pill">avg confidence: {c['confidence']:.2f}</span>
+                  </div>
+                  <table>{fields_html}</table>
+                </div>
+              """
+
+          page = f"""<!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>PDF extraction kit - live demo</title>
+            <style>
+              :root {{
+                --primary: #0d6b5e; --accent: #14b8a6;
+                --bg: #f0fdfa; --border: #99f6e4;
+                --ink: #042f2e; --muted: #4d7570;
+              }}
+              * {{ box-sizing: border-box; }}
+              body {{
+                margin: 0; font-family: 'Segoe UI', system-ui, sans-serif;
+                background: var(--bg); color: var(--ink); line-height: 1.5;
+              }}
+              .hero {{
+                background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+                color: white; padding: 50px 24px 60px;
+              }}
+              .hero-inner {{ max-width: 960px; margin: 0 auto; }}
+              .hero .kicker {{ font-size: 13px; letter-spacing: 2px; opacity: .75; text-transform: uppercase; }}
+              .hero h1 {{ font-size: 38px; margin: 10px 0 14px; line-height: 1.1; }}
+              .hero p {{ font-size: 17px; margin: 0; opacity: .92; max-width: 760px; }}
+              .container {{ max-width: 960px; margin: -30px auto 60px; padding: 0 24px; }}
+              .card {{
+                background: white; border: 1px solid var(--border); border-radius: 12px;
+                padding: 22px 26px; margin: 16px 0;
+                box-shadow: 0 1px 3px rgba(13, 107, 94, .08);
+              }}
+              .card h2 {{ margin: 4px 0 12px; font-size: 18px; }}
+              .kicker {{
+                font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+                color: var(--accent); font-weight: 700;
+              }}
+              .meta {{ margin: 0 0 14px; }}
+              .pill {{
+                display: inline-block; background: #ccfbf1; color: var(--primary);
+                padding: 3px 10px; border-radius: 12px; font-size: 12px;
+                font-weight: 600; margin-right: 6px;
+              }}
+              table {{ width: 100%; border-collapse: collapse; font-size: 13px; }}
+              td {{ padding: 7px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }}
+              td.fname {{ color: var(--muted); width: 200px; font-weight: 600; }}
+              td.conf {{ width: 60px; text-align: right; font-family: Consolas, monospace; }}
+              td.conf.high {{ color: #047857; }}
+              td.conf.mid {{ color: #b45309; }}
+              td.conf.low {{ color: #b91c1c; }}
+              td.fval {{ color: var(--ink); word-break: break-word; }}
+              .missing {{ color: #b91c1c; font-style: italic; }}
+              pre {{
+                background: #042f2e; color: #ccfbf1; padding: 12px 14px;
+                border-radius: 6px; overflow-x: auto; margin: 6px 0 0;
+                font-family: Consolas, monospace; font-size: 12px;
+              }}
+              details summary {{ cursor: pointer; color: var(--accent); font-weight: 600; }}
+              .footer {{
+                margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border);
+                color: var(--muted); font-size: 13px; text-align: center;
+              }}
+              .footer code {{ background: #ccfbf1; padding: 2px 6px; border-radius: 4px; }}
+              a {{ color: var(--accent); }}
+            </style>
+          </head>
+          <body>
+            <div class="hero">
+              <div class="hero-inner">
+                <div class="kicker">PDF extraction · structured output · eval-gated</div>
+                <h1>PDF extraction kit - live demo</h1>
+                <p>Six worked fixtures across three schema types (invoice,
+                contract, bank statement). Each card shows the per-field value
+                extracted, per-field confidence, and overall required-field
+                coverage. Default backend is the regex stub - one env var swaps
+                to an LLM extractor.</p>
+              </div>
+            </div>
+
+            <div class="container">
+              {''.join(card(c) for c in cards_data)}
+
+              <div class="footer">
+                Regenerated on every push from the regex backend against bundled fixtures.
+                Install: <code>pip install -e .</code> then <code>pdfkit demo</code>.<br>
+                Source: <a href="https://github.com/derekgallardo01/pdf-extraction-kit">github.com/derekgallardo01/pdf-extraction-kit</a>
+              </div>
+            </div>
+          </body>
+          </html>
+          """
+          with open("site/index.html", "w", encoding="utf-8") as fh:
+              fh.write(page)
+          print("wrote site/index.html")
+          PY
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deployment
+        uses: actions/deploy-pages@v4

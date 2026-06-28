@@ -1,0 +1,25 @@
+MASTER SERVICES AGREEMENT
+
+Subject: Cloud Infrastructure Management Services
+
+Between:
+Provider: CloudOps Partners LLC
+Client: Bayview Healthcare Systems
+
+Commencement: 2026-03-01
+
+Initial Term: The initial term shall be 24 months commencing on the Commencement Date.
+
+Renewal Clause: This agreement renews on-notice; written notice from Client required to renew.
+
+Notice: 60 days written notice required for termination during the initial term.
+
+Jurisdiction: Commonwealth of Massachusetts.
+
+Scope: Provider shall manage Client's AWS environments, providing 24/7 monitoring,
+incident response within stated SLAs, monthly architecture reviews, and quarterly
+cost-optimization reports.
+
+Fees: Set forth in Exhibit A. Payment terms Net 30.
+
+Authorized signatures appear on the final page.

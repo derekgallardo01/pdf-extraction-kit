@@ -1,0 +1,23 @@
+SOFTWARE LICENSE AND SUPPORT AGREEMENT
+
+Contract Title: Northwind ERP Software License Agreement
+
+This agreement is made between the following parties:
+Party A: Northwind Software Limited (the "Provider")
+Party B: Acme Manufacturing Inc. (the "Customer")
+
+Effective Date: 2026-01-15
+
+The initial term shall be 36 months from the Effective Date.
+
+Renewal: Auto-renewal for successive 12-month periods unless either party gives written notice.
+
+Notice Period: Either party may terminate this agreement by giving 90 days written notice.
+
+Governing Law: This agreement is governed by the laws of the State of New York, United States.
+
+The Customer agrees to pay the License Fees specified in Schedule A.
+The Provider agrees to provide Support Services as specified in Schedule B.
+
+Signed for Provider: /s/ Alex Chen, CEO
+Signed for Customer: /s/ Maria Rodriguez, COO

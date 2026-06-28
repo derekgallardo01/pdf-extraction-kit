@@ -1,0 +1,23 @@
+CLOUD HOSTING PROVIDERS INC.
+
+Invoice Number: CH-2026-1147
+Invoice Date: 2026-05-01
+Payment Due: 2026-05-31
+
+Vendor: Cloud Hosting Providers Inc.
+Vendor Address: 1500 Cloud Way, Seattle WA 98101
+
+Bill To: Northwind SaaS LLC
+
+Description                              4 x 25.00 = 100.00
+EC2 Reserved Instances (m5.xlarge)      4 x 250.00 = 1000.00
+S3 Storage (5 TB)                        1 x 115.00 = 115.00
+CloudWatch logs ingestion                12 x 45.00 = 540.00
+
+Subtotal: 1655.00
+Sales Tax: 132.40
+Grand Total: 1787.40
+
+Currency: USD
+
+Notes: This invoice covers usage for May 2026. Auto-pay charged to card ending 4242.
