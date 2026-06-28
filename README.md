@@ -39,6 +39,14 @@ docker run --rm pdfkit pytest -q              # runs the tests
 docker run --rm pdfkit pdfkit extract invoice fixtures/invoice-001.pdf
 ```
 
+## Example: production scenario
+
+**[examples/batch_invoice_processor.py](examples/batch_invoice_processor.py)** — Walks a directory of invoices, extracts each, splits into clean CSV (auto-processed) and JSON review queue based on confidence + coverage thresholds
+
+```bash
+python examples/batch_invoice_processor.py
+```
+
 ## What it's for
 
 Real-world PDF extraction work breaks the same way every time:
